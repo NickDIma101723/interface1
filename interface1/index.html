@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="nl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HypeHive - Premium Mode Rotterdam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="./js/animation.js" defer></script>
+    <script src="./js/mobileNav.js" defer></script>
+    <script src="./js/formValidation.js" defer></script>
+</head>
+<body class="bg-white text-black">
+    <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 lg:h-20">
+                <div class="hidden md:flex items-center space-x-8 lg:space-x-10">
+                    <a href="index.html" class="relative group font-lato text-sm lg:text-base font-medium text-black hover:text-gray-600 transition-colors duration-300">
+                        <span>Home</span>
+                        <div class="absolute -bottom-2 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></div>
+                    </a>
+                    <a href="collection.html" class="relative group font-lato text-sm lg:text-base font-medium text-black hover:text-gray-600 transition-colors duration-300">
+                        <span>Collectie</span>
+                        <div class="absolute -bottom-2 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></div>
+                    </a>
+                    <a href="about.html" class="relative group font-lato text-sm lg:text-base font-medium text-black hover:text-gray-600 transition-colors duration-300">
+                        <span>Over Ons</span>
+                        <div class="absolute -bottom-2 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></div>
+                    </a>
+                </div>
+                <div class="flex-1 flex justify-start md:flex-none">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <span class="font-poppins font-bold text-lg lg:text-xl text-black">HYPE</span>
+                        <div class="w-0.5 h-6 bg-black"></div>
+                        <span class="font-poppins font-bold text-lg lg:text-xl text-black">HIVE</span>
+                    </a>
+                </div>
+                
+
+                <div class="hidden md:flex items-center space-x-8 lg:space-x-10">
+                    <a href="sustainability.html" class="relative group font-lato text-sm lg:text-base font-medium text-black hover:text-gray-600 transition-colors duration-300">
+                        <span>Duurzaamheid</span>
+                        <div class="absolute -bottom-2 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></div>
+                    </a>
+                    <a href="opening.html" class="relative group font-lato text-sm lg:text-base font-medium text-black hover:text-gray-600 transition-colors duration-300">
+                        <span>Opening</span>
+                        <div class="absolute -bottom-2 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></div>
+                    </a>
+                    <a href="contact.html" class="relative group font-lato text-sm lg:text-base font-medium text-black hover:text-gray-600 transition-colors duration-300">
+                        <span>Contact</span>
+                        <div class="absolute -bottom-2 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></div>
+                    </a>
+                    <div class="flex items-center space-x-2 lg:space-x-4">
+                        <button class="w-9 h-9 lg:w-10 lg:h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors duration-300">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                        </button>
+                        <button class="relative w-9 h-9 lg:w-10 lg:h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors duration-300">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.293 2.293c-.63.63-.184 1.707.707 1.707H19M17 21a2 2 0 100-4 2 2 0 000 4zM9 21a2 2 0 100-4 2 2 0 000 4z"></path>
+                            </svg>
+                            <span class="absolute -top-1 -right-1 w-4 h-4 bg-black text-white text-xs rounded-full flex items-center justify-center">0</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="w-10 h-10 flex flex-col items-center justify-center space-y-1.5 hover:bg-gray-100 rounded-full transition-colors duration-300">
+                        <span class="w-5 h-0.5 bg-black transition-all duration-300"></span>
+                        <span class="w-5 h-0.5 bg-black transition-all duration-300"></span>
+                        <span class="w-5 h-0.5 bg-black transition-all duration-300"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="mobile-menu" class="fixed inset-0 z-[999] opacity-0 invisible transition-all duration-300 ease-in-out md:hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+        <div class="absolute top-0 right-0 w-full max-w-sm h-full bg-white transform translate-x-full transition-transform duration-300 ease-out">
+            <div class="flex justify-between items-center p-6 border-b border-gray-100">
+                <div class="flex items-center space-x-2">
+                    <span class="font-poppins font-bold text-lg">HYPE</span>
+                    <div class="w-0.5 h-5 bg-black"></div>
+                    <span class="font-poppins font-bold text-lg">HIVE</span>
+                </div>
+                <button id="mobile-close-btn" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors duration-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex-1 p-6">
+                <nav class="space-y-4">
+                    <a href="index.html" class="block py-3 font-lato text-lg text-black hover:text-gray-600 transition-colors duration-300 border-b border-gray-100">Home</a>
+                    <a href="collection.html" class="block py-3 font-lato text-lg text-black hover:text-gray-600 transition-colors duration-300 border-b border-gray-100">Collectie</a>
+                    <a href="about.html" class="block py-3 font-lato text-lg text-black hover:text-gray-600 transition-colors duration-300 border-b border-gray-100">Over Ons</a>
+                    <a href="sustainability.html" class="block py-3 font-lato text-lg text-black hover:text-gray-600 transition-colors duration-300 border-b border-gray-100">Duurzaamheid</a>
+                    <a href="opening.html" class="block py-3 font-lato text-lg text-black hover:text-gray-600 transition-colors duration-300 border-b border-gray-100">Opening</a>
+                    <a href="contact.html" class="block py-3 font-lato text-lg text-black hover:text-gray-600 transition-colors duration-300 border-b border-gray-100">Contact</a>
+                </nav>
+            </div>
+            <div class="p-6 border-t border-gray-100">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs font-lato text-gray-400 uppercase tracking-wider">Volg ons</span>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-8 h-8 flex items-center justify-center border border-gray-200 rounded-full hover:bg-black hover:border-black hover:text-white transition-all duration-300">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-8 h-8 flex items-center justify-center border border-gray-200 rounded-full hover:bg-black hover:border-black hover:text-white transition-all duration-300">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-8 h-8 flex items-center justify-center border border-gray-200 rounded-full hover:bg-black hover:border-black hover:text-white transition-all duration-300">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="pt-32 pb-16 md:pb-20 fade-in">
+        <div class="w-full mx-auto lg:px-12">
+            <div class="relative h-[60rem] lg:h-[50rem] min-h-[40.5rem] overflow-hidden">
+                <div class="absolute inset-0">
+                    <img src="./images/test1.png" class="w-full h-full object-cover opacity-100">
+                </div>
+                <div class="absolute bottom-6 md:bottom-8 right-4 md:right-6 z-20">
+                    <a href="collection.html" class="inline-flex items-center gap-2 md:gap-4 px-4 md:px-8 py-2 md:py-4 border-2 border-white text-white font-['Lato'] font-semibold text-sm md:text-base tracking-widest hover:bg-white hover:text-black transition-all duration-300">
+                        ONTDEK
+                        <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center z-10 px-4 fade-in">
+                    <div class="text-center max-w-6xl w-full">
+                        <div class="relative">
+                            <div class="absolute inset-0 flex items-center justify-center opacity-5">
+                                <span class="font-['Poppins'] font-black text-[8rem] md:text-[16rem] lg:text-[20rem] leading-none text-white select-none">HYPE</span>
+                            </div>
+                            <div class="relative z-10">
+                                <div class="mb-6">
+                                    <h1 class="font-['Poppins'] font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-none text-white tracking-tight">
+                                        <span class="inline-block">HYPE</span>
+                                        <span class="inline-block mx-2 md:mx-4 text-2xl md:text-4xl opacity-90">×</span>
+                                        <span class="inline-block">HIVE</span>
+                                    </h1>
+                                </div>
+                                <div class="relative mb-8">
+                                    <h2 class="font-['Poppins'] font-light text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight text-white tracking-wide">
+                                        <span class="inline-block">PREMIUM</span>
+                                        <span class="inline-block mx-2 text-white">STREETWEAR</span>
+                                        <span class="inline-block">ROTTERDAM</span>
+                                    </h2>
+                                    <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-32 md:w-48 h-0.5 bg-gradient-to-r from-transparent via-white to-transparent"></div>
+                                </div>
+                                <div class="mt-8 md:mt-12">
+                                    <p class="font-['Lato'] text-white/80 text-lg md:text-xl lg:text-2xl tracking-wide font-light">
+                                        <span class="inline-block">DUURZAAM</span>
+                                        <span class="inline-block mx-2 text-white font-medium">•</span>
+                                        <span class="inline-block">BEWUST</span>
+                                        <span class="inline-block mx-2 text-white font-medium">•</span>
+                                        <span class="inline-block">EXCLUSIEF</span>
+                                    </p>
+                                    <p class="font-['Lato'] text-white/60 text-sm md:text-base tracking-widest mt-4 uppercase">
+                                        Est. 2025 Rotterdam
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute top-12 md:top-16 left-4 md:left-6 text-white/70 z-20">
+                    <div class="font-['Lato'] text-xs md:text-sm tracking-widest transform -rotate-90 origin-left uppercase">
+                        Gevestigd 2025
+                    </div>
+                </div>
+                <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+                    <div class="flex flex-col items-center text-white/60">
+                        <span class="font-['Lato'] text-xs tracking-wider mb-3 uppercase font-light">Scroll</span>
+                        <div class="w-px h-12 bg-white/80 relative">
+                            <div class="w-px h-4 bg-white/80 animate-pulse"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-20 md:py-24 bg-black text-white">
+        <div class="max-w-10xl mx-auto px-4 md:px-8">
+            <div class="text-center fade-in">
+                <h2 class="font-['Poppins'] text-4xl md:text-5xl mb-6 font-semibold tracking-wider">
+                    HYPEHIVE COMMUNITY
+                </h2>
+                <p class="font-['Lato'] text-gray-300 mb-8 max-w-3xl mx-auto text-lg">
+                    Laat je inspireren en deel jouw looks van HypeHive door de hashtag 
+                    <span class="text-white font-semibold">#hypehive</span> te vermelden!
+                </p>
+                <div class="max-w-full mx-auto mb-16 fade-in">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                        <div class="rounded-lg overflow-hidden">
+                            <img src="./images/image.png" alt="Community Style 1" class="w-full h-72 sm:h-96 md:h-80 lg:h-[38rem] object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="rounded-lg overflow-hidden">
+                            <img src="./images/image2.png" alt="Community Style 2" class="w-full h-72 sm:h-96 md:h-80 lg:h-[38rem] object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="rounded-lg overflow-hidden">
+                            <img src="./images/image3.png" alt="Community Style 3" class="w-full h-72 sm:h-96 md:h-80 lg:h-[38rem] object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="rounded-lg overflow-hidden">
+                            <img src="./images/image4.png" alt="Community Style 4" class="w-full h-72 sm:h-96 md:h-80 lg:h-[38rem] object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 fade-in">
+                    <a href="collection.html" class="inline-block px-8 py-3 border border-white text-white font-medium text-sm tracking-wide no-underline relative overflow-hidden transition-all duration-300 hover:bg-white hover:text-black hover:-translate-y-1 hover:shadow-lg">
+                        <span class="relative z-10">Bekijk meer looks</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-16 md:py-20">
+        <div class="max-w-6xl mx-auto px-8">
+            <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 mb-16 items-center">
+                <div class="fade-in flex-1 w-full">
+                    <h2 class="font-['Poppins'] text-3xl md:text-4xl lg:text-5xl mb-6 font-normal tracking-tight bg-gradient-to-r from-black to-gray-600 bg-clip-text text-transparent">
+                        Duurzame Streetwear
+                    </h2>
+                    <p class="font-['Lato'] text-gray-600 mb-6 leading-relaxed text-base md:text-lg">
+                        We herdefiniëren wat het betekent om stijlvol en bewust te zijn. Elk kledingstuk vertelt een verhaal over duurzaamheid.
+                    </p>
+                    <a href="sustainability.html" class="inline-block px-8 py-4 bg-black text-white border-2 border-black font-medium text-sm tracking-wide no-underline relative overflow-hidden transition-all duration-300 hover:bg-white hover:text-black hover:-translate-y-1 hover:shadow-xl group">
+                        <span class="relative z-10">ONZE MISSIE</span>
+                    </a>
+                </div>
+                <div class="fade-in flex-[2] w-full">
+                    <div class="w-full h-80 md:h-96">
+                        <img src="./images/image11.png" alt="Sustainable Fashion" class="w-full h-full object-cover shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-16 md:py-20 bg-gray-50">
+        <div class="max-w-8xl mx-auto px-8">
+            <div class="text-center mb-16">
+                <div class="fade-in">
+                    <h2 class="font-['Poppins'] text-3xl md:text-4xl lg:text-5xl mb-4 font-normal tracking-tight">Nieuwe Collectie</h2>
+                    <p class="font-['Lato'] text-gray-600 max-w-3xl mx-auto text-base md:text-lg">
+                        Ontdek onze nieuwste zorgvuldig samengestelde selectie premium streetwear en duurzame modestukken
+                    </p>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-8 justify-center">
+                <div class="fade-in w-full sm:w-[30rem] md:w-[30rem] lg:w-[30rem] relative">
+                    <div class="transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1">
+                        <div class="bg-gray-50 overflow-hidden w-full h-[28rem] lg:h-[42rem]">
+                            <img src="./images/image5.png" alt="T-shirt met STWD logo" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6 flex flex-col">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <span class="text-sm text-blue-600">Exclusief online</span>
+                                    <h3 class="font-medium text-xl">T-shirt met STWD logo</h3>
+                                </div>
+                                <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-2 mt-2">
+                                <span class="font-bold text-lg">€10,79</span>
+                                <span class="text-red-600 text-base">-40%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in w-full sm:w-[30rem] md:w-[30rem] lg:w-[30rem] relative">
+                    <div class="transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1">
+                        <div class="bg-gray-50 overflow-hidden w-full h-[28rem] lg:h-[42rem]">
+                            <img src="./images/image6.png" alt="STWD T-shirt met wiel" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6 flex flex-col">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-medium text-xl">STWD T-shirt met wiel</h3>
+                                </div>
+                                <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-2 mt-2">
+                                <span class="font-bold text-lg">€10,79</span>
+                                <span class="text-red-600 text-base">-40%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in w-full sm:w-[30rem] md:w-[30rem] lg:w-[30rem] relative">
+                    <div class="transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1">
+                        <div class="bg-gray-50 overflow-hidden w-full h-[28rem] lg:h-[42rem]">
+                            <img src="./images/image7.png" alt="Essential Hoodie" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6 flex flex-col">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-medium text-xl">Essential Hoodie</h3>
+                                </div>
+                                <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-2 mt-2">
+                                <span class="font-bold text-lg">€149,00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in w-full sm:w-[30rem] md:w-[30rem] lg:w-[30rem] relative">
+                    <div class="transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1">
+                        <div class="bg-gray-50 overflow-hidden w-full h-[28rem] lg:h-[42rem]">
+                            <img src="./images/image8.png" alt="Sustainable Tee" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6 flex flex-col">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-medium text-xl">Sustainable Tee</h3>
+                                </div>
+                                <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-2 mt-2">
+                                <span class="font-bold text-lg">€69,00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in w-full sm:w-[30rem] md:w-[30rem] lg:w-[30rem] relative">
+                    <div class="transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1">
+                        <div class="bg-gray-50 overflow-hidden w-full h-[28rem] lg:h-[42rem]">
+                            <img src="./images/image9.png" alt="Urban Joggers" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6 flex flex-col">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-medium text-xl">Urban Joggers</h3>
+                                </div>
+                                <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-2 mt-2">
+                                <span class="font-bold text-lg">€89,00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in w-full sm:w-[30rem] md:w-[30rem] lg:w-[30rem] relative">
+                    <div class="transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1">
+                        <div class="bg-gray-50 overflow-hidden w-full h-[28rem] lg:h-[42rem]">
+                            <img src="./images/image10.png" alt="Statement Cap" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6 flex flex-col">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-medium text-xl">Statement Cap</h3>
+                                </div>
+                                <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-2 mt-2">
+                                <span class="font-bold text-lg">€49,00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-16">
+                <a href="collection.html" class="inline-block px-8 py-4 bg-black text-white border-2 border-black font-medium text-sm tracking-wide no-underline relative overflow-hidden transition-all duration-300 hover:bg-white hover:text-black hover:-translate-y-1 hover:shadow-lg group">
+                    <span class="relative z-10">BEKIJK ALLES</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="py-15 md:py-20 mb-10 md:mb-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-6 lg:gap-10 items-center">
+                <div class="fade-in flex-[2]">
+                    <h2 class="font-space text-4xl md:text-5xl mb-6 font-normal tracking-tight bg-gradient-to-r from-black to-gray-600 bg-clip-text text-transparent">
+                        Word Deel van Onze Community
+                    </h2>
+                    <p class="font-['Lato'] text-gray-600 mb-6 text-lg leading-relaxed">
+                        HypeHive is meer dan een winkel - we bouwen aan een gemeenschap van bewuste mode-enthousiastelingen die geloven dat stijl en duurzaamheid samen kunnen gaan.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-6 mb-8">
+                        <div class="bg-gray-50 p-10 rounded-xl transition-all duration-300 h-full hover:-translate-y-1 hover:shadow-lg flex-1">
+                            <h3 class="text-xl font-semibold mb-3">Inruilprogramma</h3>
+                            <p class="text-gray-600 text-sm">Ruil je oude items in voor winkelkrediet</p>
+                        </div>
+                        <div class="bg-gray-50 p-10 rounded-xl transition-all duration-300 h-full hover:-translate-y-1 hover:shadow-lg flex-1">
+                            <h3 class="text-xl font-semibold mb-3">Exclusieve Events</h3>
+                            <p class="text-gray-600 text-sm">Alleen-voor-leden collecties en bijeenkomsten</p>
+                        </div>
+                    </div>
+                    <a href="about.html" class="inline-block px-8 py-4 bg-black text-white border-2 border-black font-medium text-sm tracking-wide no-underline relative overflow-hidden transition-all duration-300 hover:bg-white hover:text-black hover:-translate-y-1 hover:shadow-lg group">
+                        <span class="relative z-10">MEER INFORMATIE</span>
+                    </a>
+                </div>
+                <div class="fade-in flex-1">
+                    <div class="w-full h-auto sm:h-[18.75rem] md:h-[21.875rem] lg:h-[25rem] overflow-hidden shadow-xl mb-6 md:mb-10">
+                        <img src="./images/image12.png" alt="Community" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-24 md:py-32 bg-black text-white">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <div class="fade-in flex flex-col items-center py-6 md:py-10">
+                <h2 class="font-['Poppins'] text-3xl md:text-4xl mb-6 font-normal tracking-tight">Grote Opening</h2>
+                <p class="font-['Poppins'] text-2xl font-light mb-6">8 augustus 2024</p>
+                <p class="font-['Lato'] text-gray-300 mb-14 max-w-2xl mx-auto">
+                    Doe met ons mee voor een exclusieve viering met live DJ-sets, limited edition drops 
+                    en speciale verrassingen voor de eerste 100 gasten.
+                </p>
+                <div class="mb-8 md:mb-12">
+                    <a href="opening.html" class="inline-block px-8 py-4 bg-white text-black border-2 border-white font-medium text-sm tracking-wide no-underline relative overflow-hidden transition-all duration-300 hover:bg-transparent hover:text-white hover:-translate-y-1 hover:shadow-lg group">
+                        <span class="relative z-10">MEER DETAILS</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pt-28 md:pt-36 pb-15 md:pb-20">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="fade-in">
+                <h2 class="font-['Poppins'] text-2xl md:text-3xl mb-4 font-normal tracking-tight">Blijf op de hoogte</h2>
+                <p class="font-['Lato'] text-gray-600 mb-8 max-w-2xl mx-auto">
+                    Wees als eerste op de hoogte van nieuwe collecties, exclusieve drops en evenementen
+                </p>
+                <form id="newsletterForm" class="flex flex-col gap-4 max-w-md mx-auto text-left bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                    <div class="mb-2">
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input 
+                            type="email" 
+                            id="email"
+                            name="email"
+                            placeholder="Vul je e-mailadres in" 
+                            class="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-black transition-colors font-['Lato'] rounded"
+                            required
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        >
+                        <span id="emailError" class="text-red-500 text-xs mt-1 hidden"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Adres</label>
+                        <input 
+                            type="text" 
+                            id="address"
+                            name="address"
+                            placeholder="Straat en huisnummer" 
+                            class="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-black transition-colors font-['Lato']"
+                            required
+                            minlength="5"
+                        >
+                        <span id="addressError" class="text-red-500 text-xs mt-1 hidden"></span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-2">
+                        <div>
+                            <label for="postcode" class="block text-sm font-medium text-gray-700 mb-1">Postcode</label>
+                            <input 
+                                type="text" 
+                                id="postcode"
+                                name="postcode"
+                                placeholder="1234 AB" 
+                                class="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-black transition-colors font-['Lato']"
+                                required
+                                pattern="[0-9]{4}\s?[A-Za-z]{2}"
+                            >
+                            <span id="postcodeError" class="text-red-500 text-xs mt-1 hidden"></span>
+                        </div>
+                        <div>
+                            <label for="city" class="block text-sm font-medium text-gray-700 mb-1">Woonplaats</label>
+                            <input 
+                                type="text" 
+                                id="city"
+                                name="city"
+                                placeholder="Bijv. Rotterdam" 
+                                class="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-black transition-colors font-['Lato']"
+                                required
+                            >
+                            <span id="cityError" class="text-red-500 text-xs mt-1 hidden"></span>
+                        </div>
+                    </div>
+                    <button 
+                        type="submit" 
+                        class="inline-block px-8 py-4 bg-black text-white border-2 border-black font-medium text-sm tracking-wide no-underline relative overflow-hidden transition-all duration-300 hover:bg-white hover:text-black hover:-translate-y-1 hover:shadow-lg group mt-2"
+                    >
+                        <span class="relative z-10">INSCHRIJVEN</span>
+                    </button>
+                    <div id="formSuccess" class="text-green-500 text-sm mt-2 hidden">Bedankt voor je inschrijving!</div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="bg-white border-t border-gray-100 py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+
+                <div class="lg:col-span-1">
+                    <a href="index.html" class="text-2xl font-semibold tracking-tighter text-black">HypeHive</a>
+                    <p class="text-gray-500 mt-4 text-sm">
+                        Premium mode en streetwear in Rotterdam. Duurzaam en exclusief voor de échte liefhebbers.
+                    </p>
+                </div>
+                
+
+                <div>
+                    <h5 class="font-medium text-sm uppercase tracking-wider mb-5 text-gray-700">Shop</h5>
+                    <ul class="space-y-3">
+                        <li><a href="collection.html" class="text-gray-500 hover:text-black transition-colors text-sm">Collectie</a></li>
+                        <li><a href="sustainability.html" class="text-gray-500 hover:text-black transition-colors text-sm">Duurzaamheid</a></li>
+                        <li><a href="opening.html" class="text-gray-500 hover:text-black transition-colors text-sm">Events</a></li>
+                    </ul>
+                </div>
+                
+
+                <div>
+                    <h5 class="font-medium text-sm uppercase tracking-wider mb-5 text-gray-700">Bedrijf</h5>
+                    <ul class="space-y-3">
+                        <li><a href="about.html" class="text-gray-500 hover:text-black transition-colors text-sm">Over Ons</a></li>
+                        <li><a href="contact.html" class="text-gray-500 hover:text-black transition-colors text-sm">Contact</a></li>
+                    </ul>
+                </div>
+                
+
+                <div>
+                    <h5 class="font-medium text-sm uppercase tracking-wider mb-5 text-gray-700">Blijf op de hoogte</h5>
+                    <form class="mt-2">
+                        <div class="flex">
+                            <input 
+                                type="email" 
+                                placeholder="E-mailadres" 
+                                class="flex-1 px-4 py-2 text-sm border border-gray-200 focus:outline-none focus:ring-1 focus:ring-black"
+                            >
+                            <button type="submit" class="bg-black text-white px-4 py-2 text-sm">
+                                <span>→</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+
+            <div class="border-t border-gray-100 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-xs text-gray-400 mb-4 md:mb-0">&copy; 2025 HypeHive. Alle rechten voorbehouden.</p>
+                
+
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-black transition-colors">
+                        <span class="sr-only">Instagram</span>
+                        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-black transition-colors">
+                        <span class="sr-only">Twitter</span>
+                        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-black transition-colors">
+                        <span class="sr-only">Facebook</span>
+                        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
