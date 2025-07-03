@@ -24,6 +24,10 @@
                         <span>Collectie</span>
                         <div class="absolute -bottom-2 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></div>
                     </a>
+                    <a href="verkopen.html" class="relative group font-lato text-sm lg:text-base font-medium text-black hover:text-gray-600 transition-colors duration-300">
+                        <span>Verkopen</span>
+                        <div class="absolute -bottom-2 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></div>
+                    </a>
                     <a href="about.html" class="relative group font-lato text-sm lg:text-base font-medium text-black hover:text-gray-600 transition-colors duration-300">
                         <span>Over Ons</span>
                         <div class="absolute -bottom-2 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></div>
@@ -95,6 +99,7 @@
                 <nav class="space-y-4">
                     <a href="index.html" class="block py-3 font-lato text-lg text-black hover:text-gray-600 transition-colors duration-300 border-b border-gray-100">Home</a>
                     <a href="collection.html" class="block py-3 font-lato text-lg text-black hover:text-gray-600 transition-colors duration-300 border-b border-gray-100">Collectie</a>
+                    <a href="verkopen.html" class="block py-3 font-lato text-lg text-black hover:text-gray-600 transition-colors duration-300 border-b border-gray-100">Verkopen</a>
                     <a href="about.html" class="block py-3 font-lato text-lg text-black hover:text-gray-600 transition-colors duration-300 border-b border-gray-100">Over Ons</a>
                     <a href="sustainability.html" class="block py-3 font-lato text-lg text-black hover:text-gray-600 transition-colors duration-300 border-b border-gray-100">Duurzaamheid</a>
                     <a href="opening.html" class="block py-3 font-lato text-lg text-black hover:text-gray-600 transition-colors duration-300 border-b border-gray-100">Opening</a>
@@ -237,9 +242,11 @@
                     <p class="font-['Lato'] text-gray-600 mb-6 leading-relaxed text-base md:text-lg">
                         We herdefiniëren wat het betekent om stijlvol en bewust te zijn. Elk kledingstuk vertelt een verhaal over duurzaamheid.
                     </p>
-                    <a href="sustainability.html" class="inline-block px-8 py-4 bg-black text-white border-2 border-black font-medium text-sm tracking-wide no-underline relative overflow-hidden transition-all duration-300 hover:bg-white hover:text-black hover:-translate-y-1 hover:shadow-xl group">
-                        <span class="relative z-10">ONZE MISSIE</span>
-                    </a>
+                    <div class="text-center lg:text-left">
+                        <a href="sustainability.html" class="inline-block px-8 py-4 bg-black text-white border-2 border-black font-medium text-sm tracking-wide no-underline relative overflow-hidden transition-all duration-300 hover:bg-white hover:text-black hover:-translate-y-1 hover:shadow-xl group">
+                            <span class="relative z-10">ONZE MISSIE</span>
+                        </a>
+                    </div>
                 </div>
                 <div class="fade-in flex-[2] w-full">
                     <div class="w-full h-80 md:h-96">
@@ -261,7 +268,7 @@
             </div>
             <div class="flex flex-wrap gap-8 justify-center">
                 <div class="fade-in w-full sm:w-[30rem] md:w-[30rem] lg:w-[30rem] relative">
-                    <div class="transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1">
+                    <a href="detail.html?id=13" class="block transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1 no-underline text-inherit">
                         <div class="bg-gray-50 overflow-hidden w-full h-[28rem] lg:h-[42rem]">
                             <img src="./images/image5.png" alt="T-shirt met STWD logo" class="w-full h-full object-cover">
                         </div>
@@ -271,8 +278,8 @@
                                     <span class="text-sm text-blue-600">Exclusief online</span>
                                     <h3 class="font-medium text-xl">T-shirt met STWD logo</h3>
                                 </div>
-                                <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-red-50 hover:border-red-300 transition-colors duration-200" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('favorited'); this.querySelector('svg').classList.toggle('text-red-500');">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-colors duration-200">
                                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path>
                                     </svg>
                                 </button>
@@ -282,10 +289,10 @@
                                 <span class="text-red-600 text-base">-40%</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="fade-in w-full sm:w-[30rem] md:w-[30rem] lg:w-[30rem] relative">
-                    <div class="transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1">
+                    <a href="detail.html?id=14" class="block transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1 no-underline text-inherit">
                         <div class="bg-gray-50 overflow-hidden w-full h-[28rem] lg:h-[42rem]">
                             <img src="./images/image6.png" alt="STWD T-shirt met wiel" class="w-full h-full object-cover">
                         </div>
@@ -294,8 +301,8 @@
                                 <div>
                                     <h3 class="font-medium text-xl">STWD T-shirt met wiel</h3>
                                 </div>
-                                <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-red-50 hover:border-red-300 transition-colors duration-200" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('favorited'); this.querySelector('svg').classList.toggle('text-red-500');">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-colors duration-200">
                                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path>
                                     </svg>
                                 </button>
@@ -305,10 +312,10 @@
                                 <span class="text-red-600 text-base">-40%</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="fade-in w-full sm:w-[30rem] md:w-[30rem] lg:w-[30rem] relative">
-                    <div class="transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1">
+                    <a href="detail.html?id=15" class="block transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1 no-underline text-inherit">
                         <div class="bg-gray-50 overflow-hidden w-full h-[28rem] lg:h-[42rem]">
                             <img src="./images/image7.png" alt="Essential Hoodie" class="w-full h-full object-cover">
                         </div>
@@ -317,8 +324,8 @@
                                 <div>
                                     <h3 class="font-medium text-xl">Essential Hoodie</h3>
                                 </div>
-                                <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-red-50 hover:border-red-300 transition-colors duration-200" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('favorited'); this.querySelector('svg').classList.toggle('text-red-500');">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-colors duration-200">
                                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path>
                                     </svg>
                                 </button>
@@ -327,10 +334,10 @@
                                 <span class="font-bold text-lg">€149,00</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="fade-in w-full sm:w-[30rem] md:w-[30rem] lg:w-[30rem] relative">
-                    <div class="transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1">
+                    <a href="detail.html?id=16" class="block transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1 no-underline text-inherit">
                         <div class="bg-gray-50 overflow-hidden w-full h-[28rem] lg:h-[42rem]">
                             <img src="./images/image8.png" alt="Sustainable Tee" class="w-full h-full object-cover">
                         </div>
@@ -339,8 +346,8 @@
                                 <div>
                                     <h3 class="font-medium text-xl">Sustainable Tee</h3>
                                 </div>
-                                <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-red-50 hover:border-red-300 transition-colors duration-200" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('favorited'); this.querySelector('svg').classList.toggle('text-red-500');">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-colors duration-200">
                                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path>
                                     </svg>
                                 </button>
@@ -349,10 +356,10 @@
                                 <span class="font-bold text-lg">€69,00</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="fade-in w-full sm:w-[30rem] md:w-[30rem] lg:w-[30rem] relative">
-                    <div class="transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1">
+                    <a href="detail.html?id=17" class="block transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1 no-underline text-inherit">
                         <div class="bg-gray-50 overflow-hidden w-full h-[28rem] lg:h-[42rem]">
                             <img src="./images/image9.png" alt="Urban Joggers" class="w-full h-full object-cover">
                         </div>
@@ -361,8 +368,8 @@
                                 <div>
                                     <h3 class="font-medium text-xl">Urban Joggers</h3>
                                 </div>
-                                <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-red-50 hover:border-red-300 transition-colors duration-200" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('favorited'); this.querySelector('svg').classList.toggle('text-red-500');">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-colors duration-200">
                                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path>
                                     </svg>
                                 </button>
@@ -371,10 +378,10 @@
                                 <span class="font-bold text-lg">€89,00</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="fade-in w-full sm:w-[30rem] md:w-[30rem] lg:w-[30rem] relative">
-                    <div class="transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1">
+                    <a href="detail.html?id=18" class="block transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1 no-underline text-inherit">
                         <div class="bg-gray-50 overflow-hidden w-full h-[28rem] lg:h-[42rem]">
                             <img src="./images/image10.png" alt="Statement Cap" class="w-full h-full object-cover">
                         </div>
@@ -383,8 +390,8 @@
                                 <div>
                                     <h3 class="font-medium text-xl">Statement Cap</h3>
                                 </div>
-                                <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-red-50 hover:border-red-300 transition-colors duration-200" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('favorited'); this.querySelector('svg').classList.toggle('text-red-500');">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-colors duration-200">
                                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path>
                                     </svg>
                                 </button>
@@ -393,7 +400,7 @@
                                 <span class="font-bold text-lg">€49,00</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
             <div class="text-center mt-16">
@@ -542,6 +549,7 @@
                     <h5 class="font-medium text-sm uppercase tracking-wider mb-5 text-gray-700">Shop</h5>
                     <ul class="space-y-3">
                         <li><a href="collection.html" class="text-gray-500 hover:text-black transition-colors text-sm">Collectie</a></li>
+                        <li><a href="verkopen.html" class="text-gray-500 hover:text-black transition-colors text-sm">Verkopen</a></li>
                         <li><a href="sustainability.html" class="text-gray-500 hover:text-black transition-colors text-sm">Duurzaamheid</a></li>
                         <li><a href="opening.html" class="text-gray-500 hover:text-black transition-colors text-sm">Events</a></li>
                     </ul>

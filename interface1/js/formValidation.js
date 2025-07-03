@@ -57,7 +57,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
   
             field.addEventListener('input', function() {
-                // Try both methods of finding the error element
                 let errorElement = this.nextElementSibling;
                 if (!errorElement || !errorElement.classList.contains('error-message')) {
                     errorElement = document.getElementById(`${this.name}Error`);
@@ -75,7 +74,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             let isValid = true;
             
-  
             formFields.forEach(field => {
                 if (!validateField(field)) {
                     isValid = false;
