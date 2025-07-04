@@ -16,9 +16,8 @@ try {
     exit;
 }
 ?>
-
 <!DOCTYPE html>
-<html lang="nl" class="scroll-smooth">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -153,7 +152,7 @@ try {
         <div class="w-full mx-auto lg:px-12">
             <div class="relative h-[60rem] lg:h-[50rem] min-h-[40.5rem] overflow-hidden">
                 <div class="absolute inset-0">
-                    <img src="./images/test1.png" class="w-full h-full object-cover opacity-100">
+                    <img src="./interface1/images/test1.png" class="w-full h-full object-cover opacity-100">
                 </div>
                 <div class="absolute bottom-6 md:bottom-8 right-4 md:right-6 z-20">
                     <a href="products.php" class="inline-flex items-center gap-2 md:gap-4 px-4 md:px-8 py-2 md:py-4 border-2 border-white text-white font-['Lato'] font-semibold text-sm md:text-base tracking-widest hover:bg-white hover:text-black transition-all duration-300">
@@ -218,7 +217,6 @@ try {
         </div>
     </section>
     
-    <!-- Featured Products Section -->
     <section class="py-16 md:py-20 bg-gray-50">
         <div class="max-w-8xl mx-auto px-8">
             <div class="text-center mb-16">
@@ -234,10 +232,10 @@ try {
                 <div class="flex flex-wrap gap-8 justify-center">
                     <?php foreach ($result as $row): ?>
                         <div class="fade-in w-full sm:w-[30rem] md:w-[30rem] lg:w-[30rem] relative">
-                            <a href="product_detail.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="block transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1 no-underline text-inherit">
+                            <a href="product_detail.php?id=<?= $row['id'] ?>" class="block transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1 no-underline text-inherit">
                                 <div class="bg-gray-50 overflow-hidden w-full h-[28rem] lg:h-[42rem]">
                                     <?php if (!empty($row['afbeelding'])): ?>
-                                        <img src="uploads/<?php echo htmlspecialchars($row['afbeelding']); ?>" alt="<?php echo htmlspecialchars($row['naam']); ?>" class="w-full h-full object-cover">
+                                        <img src="uploads/<?= $row['afbeelding'] ?>" alt="<?= $row['naam'] ?>" class="w-full h-full object-cover">
                                     <?php else: ?>
                                         <div class="w-full h-full flex items-center justify-center bg-gray-200">
                                             <span class="text-gray-400">Geen afbeelding</span>
@@ -248,9 +246,9 @@ try {
                                     <div class="flex items-center justify-between">
                                         <div>
                                             <?php if (!empty($row['maat'])): ?>
-                                                <span class="text-sm text-blue-600">Maat: <?php echo htmlspecialchars($row['maat']); ?></span>
+                                                <span class="text-sm text-blue-600">Maat: <?= $row['maat'] ?></span>
                                             <?php endif; ?>
-                                            <h3 class="font-medium text-xl"><?php echo htmlspecialchars($row['naam']); ?></h3>
+                                            <h3 class="font-medium text-xl"><?= $row['naam'] ?></h3>
                                         </div>
                                         <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-red-50 hover:border-red-300 transition-colors duration-200" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('favorited'); this.querySelector('svg').classList.toggle('text-red-500');">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-colors duration-200">
@@ -259,7 +257,7 @@ try {
                                         </button>
                                     </div>
                                     <div class="flex items-center gap-2 mt-2">
-                                        <span class="font-bold text-lg">€<?php echo number_format(($row['prijs'] ?? 0) / 100, 2, ',', '.'); ?></span>
+                                        <span class="font-bold text-lg">€<?= ($row['prijs'] ?? 0) / 100 ?></span>
                                     </div>
                                 </div>
                             </a>

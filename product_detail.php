@@ -1,8 +1,6 @@
 <?php
-// Include database connection
 require 'config.php';
 
-// Check if ID is provided
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     header("Location: products.php");
     exit;
@@ -11,7 +9,6 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
 
 try {
-    // Get product details
     $query = "SELECT * FROM products WHERE id = :id";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -24,19 +21,20 @@ try {
         exit;
     }
 } catch(PDOException $e) {
-    echo "<p>Error occurred!</p>";
-    echo "<p>Query: " . $query . "</p>";
-    echo "<p>Error: " . $e->getMessage() . "</p>";
+    ?> 
+    <p>Error occurred!</p>
+    <p>Query: <?= $query ?></p>
+    <p>Error: <?= $e->getMessage() ?></p>
+    <?php
     exit;
 }
 ?>
-
 <!DOCTYPE html>
-<html lang="nl" class="scroll-smooth">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HypeHive - <?php echo htmlspecialchars($product['naam']); ?></title>
+    <title>HypeHive - <?= $product['naam'] ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
@@ -156,7 +154,7 @@ try {
                 <div class="w-full lg:w-1/2">
                     <?php if (!empty($product['afbeelding'])): ?>
                         <div class="bg-gray-50 h-96 md:h-[36rem] overflow-hidden">
-                            <img src="uploads/<?php echo htmlspecialchars($product['afbeelding']); ?>" alt="<?php echo htmlspecialchars($product['naam']); ?>" class="w-full h-full object-contain">
+                            <img src="uploads/<?= $product['afbeelding'] ?>" alt="<?= $product['naam'] ?>" class="w-full h-full object-contain">
                         </div>
                     <?php else: ?>
                         <div class="w-full h-96 md:h-[36rem] bg-gray-200 flex items-center justify-center">
@@ -166,17 +164,17 @@ try {
                 </div>
 
                 <div class="w-full lg:w-1/2">
-                    <h1 class="font-poppins font-bold text-3xl sm:text-4xl md:text-5xl mb-4"><?php echo htmlspecialchars($product['naam']); ?></h1>
+                    <h1 class="font-poppins font-bold text-3xl sm:text-4xl md:text-5xl mb-4"><?= $product['naam'] ?></h1>
                     
                     <div class="mb-6">
-                        <span class="font-bold text-2xl">€<?php echo number_format(($product['prijs'] ?? 0) / 100, 2, ',', '.'); ?></span>
+                        <span class="font-bold text-2xl">€<?= ($product['prijs'] ?? 0) / 100 ?></span>
                     </div>
 
                     <?php if (!empty($product['maat'])): ?>
                         <div class="mb-6">
                             <h3 class="text-lg font-semibold mb-2">Maat</h3>
                             <div class="inline-block px-4 py-2 border border-black text-center">
-                                <?php echo htmlspecialchars($product['maat']); ?>
+                                <?= $product['maat'] ?>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -184,7 +182,7 @@ try {
                     <?php if (!empty($product['omschrijving'])): ?>
                         <div class="mb-8">
                             <h3 class="text-lg font-semibold mb-2">Omschrijving</h3>
-                            <p class="text-gray-600 whitespace-pre-line"><?php echo nl2br(htmlspecialchars($product['omschrijving'])); ?></p>
+                            <p class="text-gray-600 whitespace-pre-line"><?= $product['omschrijving'] ?></p>
                         </div>
                     <?php endif; ?>
 

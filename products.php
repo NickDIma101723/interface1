@@ -1,9 +1,7 @@
 <?php
-// Include database connection
 require 'config.php';
 
 try {
-    // Get all products from the database
     $query = "SELECT * FROM products ORDER BY id DESC";
     $stmt = $conn->prepare($query);
     $stmt->execute();
@@ -18,7 +16,7 @@ try {
 }
 ?>
 <!DOCTYPE html>
-<html lang="nl" class="scroll-smooth">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,16 +26,6 @@ try {
     <link rel="stylesheet" href="css/styles.css">
     <script src="./js/animation.js" defer></script>
     <script src="./js/mobileNav.js" defer></script>
-    <style>
-        /* Hide scrollbar but keep scrolling functionality */
-        .no-scrollbar {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;  /* Chrome, Safari and Opera */
-        }
-    </style>
 </head>
 <body class="bg-white text-black">
     <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
@@ -150,10 +138,10 @@ try {
                 <div class="flex overflow-x-auto pb-8 gap-8 no-scrollbar">
                     <?php foreach ($result as $row): ?>
                         <div class="fade-in flex-shrink-0 w-[30rem] relative">
-                            <a href="product_detail.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="block transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1 no-underline text-inherit">
+                            <a href="product_detail.php?id=<?= $row['id'] ?>" class="block transition-all duration-300 bg-white overflow-hidden hover:-translate-y-1 no-underline text-inherit">
                                 <div class="bg-gray-50 overflow-hidden w-full h-[28rem] lg:h-[42rem]">
                                     <?php if (!empty($row['afbeelding'])): ?>
-                                        <img src="uploads/<?php echo htmlspecialchars($row['afbeelding']); ?>" alt="<?php echo htmlspecialchars($row['naam']); ?>" class="w-full h-full object-cover">
+                                        <img src="uploads/<?= $row['afbeelding'] ?>" alt="<?= $row['naam'] ?>" class="w-full h-full object-cover">
                                     <?php else: ?>
                                         <div class="w-full h-full flex items-center justify-center bg-gray-200">
                                             <span class="text-gray-400">Geen afbeelding</span>
@@ -164,9 +152,9 @@ try {
                                     <div class="flex items-center justify-between">
                                         <div>
                                             <?php if (!empty($row['maat'])): ?>
-                                                <span class="text-sm text-blue-600">Maat: <?php echo htmlspecialchars($row['maat']); ?></span>
+                                                <span class="text-sm text-blue-600">Maat: <?= $row['maat'] ?></span>
                                             <?php endif; ?>
-                                            <h3 class="font-medium text-xl"><?php echo htmlspecialchars($row['naam']); ?></h3>
+                                            <h3 class="font-medium text-xl"><?= $row['naam'] ?></h3>
                                         </div>
                                         <button class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-red-50 hover:border-red-300 transition-colors duration-200" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('favorited'); this.querySelector('svg').classList.toggle('text-red-500');">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-colors duration-200">
@@ -175,10 +163,10 @@ try {
                                         </button>
                                     </div>
                                     <?php if (!empty($row['omschrijving'])): ?>
-                                        <p class="text-gray-600 mt-2 line-clamp-2"><?php echo htmlspecialchars($row['omschrijving']); ?></p>
+                                        <p class="text-gray-600 mt-2 line-clamp-2"><?= $row['omschrijving'] ?></p>
                                     <?php endif; ?>
                                     <div class="flex items-center gap-2 mt-2">
-                                        <span class="font-bold text-lg">€<?php echo number_format(($row['prijs'] ?? 0) / 100, 2, ',', '.'); ?></span>
+                                        <span class="font-bold text-lg">€<?= ($row['prijs'] ?? 0) / 100 ?></span>
                                     </div>
                                 </div>
                             </a>
@@ -249,8 +237,5 @@ try {
             </div>
         </div>
     </footer>
-
-    <script src="./js/animation.js"></script>
-    <script src="./js/mobileNav.js"></script>
 </body>
 </html>
