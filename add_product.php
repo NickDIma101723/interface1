@@ -1,5 +1,4 @@
 <?php
-// Include database connection
 require 'config.php';
 
 $errors = [];
@@ -11,94 +10,76 @@ $formData = [
     'prijs' => ''
 ];
 
-// Create uploads directory if it doesn't exist
+// Create uploads directory if needed
 if (!file_exists('uploads')) {
     mkdir('uploads', 0777, true);
 }
 
-// Check if form is submitted
+// Form submission processing
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Validate name (required)
-    if (empty($_POST['naam'])) {
-        $errors['naam'] = 'Naam is verplicht';
-    } else {
-        $formData['naam'] = trim($_POST['naam']);
-    }
-    
-    // Validate description (optional)
+    // Get form data with basic validation
+    $formData['naam'] = !empty($_POST['naam']) ? trim($_POST['naam']) : '';
     $formData['omschrijving'] = !empty($_POST['omschrijving']) ? trim($_POST['omschrijving']) : null;
     
-    // Validate size (optional, but must be XS, S, M, L or XL if provided)
+    // Check required fields
+    if (empty($formData['naam'])) {
+        $errors['naam'] = 'Naam is verplicht';
+    }
+    
+    // Handle maat (size)
     if (!empty($_POST['maat'])) {
         $maat = strtoupper(trim($_POST['maat']));
-        if (!in_array($maat, ['XS', 'S', 'M', 'L', 'XL'])) {
-            $errors['maat'] = 'Maat moet XS, S, M, L of XL zijn';
-        } else {
+        if (in_array($maat, ['XS', 'S', 'M', 'L', 'XL'])) {
             $formData['maat'] = $maat;
+        } else {
+            $errors['maat'] = 'Maat moet XS, S, M, L of XL zijn';
         }
     } else {
         $formData['maat'] = null;
     }
     
-    // Validate price (required, must be a number)
-    if (empty($_POST['prijs'])) {
-        $errors['prijs'] = 'Prijs is verplicht';
-    } else {
+    // Handle price
+    if (!empty($_POST['prijs'])) {
         $prijs = str_replace(',', '.', $_POST['prijs']);
-        if (!is_numeric($prijs) || $prijs <= 0) {
-            $errors['prijs'] = 'Prijs moet een positief getal zijn';
+        if (is_numeric($prijs) && $prijs > 0) {
+            $formData['prijs'] = round($prijs * 100); // Convert to cents
         } else {
-            // Convert price to cents for storage
-            $formData['prijs'] = round($prijs * 100);
+            $errors['prijs'] = 'Prijs moet een positief getal zijn';
         }
+    } else {
+        $errors['prijs'] = 'Prijs is verplicht';
     }
     
-    // Validate image (optional)
+    // Handle image upload
     $afbeelding = null;
     if (!empty($_FILES['afbeelding']['name'])) {
         $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-        $fileType = $_FILES['afbeelding']['type'];
         
-        if (!in_array($fileType, $allowedTypes)) {
-            $errors['afbeelding'] = 'Alleen JPG, PNG, GIF of WEBP bestanden zijn toegestaan';
-        } else {
+        if (in_array($_FILES['afbeelding']['type'], $allowedTypes)) {
             $fileName = time() . '_' . basename($_FILES['afbeelding']['name']);
             $targetPath = 'uploads/' . $fileName;
             
             if (move_uploaded_file($_FILES['afbeelding']['tmp_name'], $targetPath)) {
                 $afbeelding = $fileName;
             } else {
-                $errors['afbeelding'] = 'Er is een fout opgetreden bij het uploaden van de afbeelding';
+                $errors['afbeelding'] = 'Fout bij het uploaden van de afbeelding';
             }
+        } else {
+            $errors['afbeelding'] = 'Alleen JPG, PNG, GIF of WEBP bestanden zijn toegestaan';
         }
     }
     
-    // If no errors, insert into database
+    // Save to database if no errors
     if (empty($errors)) {
         try {
-            $query = "INSERT INTO products (naam, omschrijving, maat, afbeelding, prijs) VALUES (:naam, :omschrijving, :maat, :afbeelding, :prijs)";
+            $query = "INSERT INTO products (naam, omschrijving, maat, afbeelding, prijs) VALUES (?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($query);
-            $stmt->bindParam(':naam', $formData['naam']);
-            $stmt->bindParam(':omschrijving', $formData['omschrijving']);
-            $stmt->bindParam(':maat', $formData['maat']);
-            $stmt->bindParam(':afbeelding', $afbeelding);
-            $stmt->bindParam(':prijs', $formData['prijs']);
-            $stmt->execute();
+            $stmt->execute([$formData['naam'], $formData['omschrijving'], $formData['maat'], $afbeelding, $formData['prijs']]);
             
             $success = true;
-            
-            // Clear form data
-            $formData = [
-                'naam' => '',
-                'omschrijving' => '',
-                'maat' => '',
-                'prijs' => ''
-            ];
+            $formData = ['naam' => '', 'omschrijving' => '', 'maat' => '', 'prijs' => '']; // Reset form
         } catch(PDOException $e) {
-            echo "<p>Error occurred!</p>";
-            echo "<p>Query: " . $query . "</p>";
-            echo "<p>Error: " . $e->getMessage() . "</p>";
-            $errors['general'] = "Er is een fout opgetreden bij het verwerken van je aanvraag.";
+            $errors['general'] = "Er is een fout opgetreden bij het opslaan.";
         }
     }
 }
@@ -263,15 +244,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form action="add_product.php" method="post" enctype="multipart/form-data" class="bg-white p-6 md:p-10 rounded-lg shadow-sm fade-in">
                 <div class="mb-6">
                     <label for="naam" class="block text-sm font-medium text-gray-700 mb-1">Naam *</label>
-                    <input 
-                        type="text" 
-                        id="naam" 
-                        name="naam" 
-                        value="<?php echo htmlspecialchars($formData['naam']); ?>" 
-                        placeholder="Productnaam" 
-                        class="w-full px-4 py-3 border <?php echo !empty($errors['naam']) ? 'border-red-500' : 'border-gray-300'; ?> focus:outline-none focus:border-black transition-colors font-['Lato'] rounded"
-                        required
-                    >
+                    <input type="text" id="naam" name="naam" value="<?php echo htmlspecialchars($formData['naam']); ?>" 
+                        placeholder="Productnaam" class="w-full px-4 py-3 border <?php echo !empty($errors['naam']) ? 'border-red-500' : 'border-gray-300'; ?> focus:border-black rounded" required>
                     <?php if (!empty($errors['naam'])): ?>
                         <p class="text-red-500 text-xs mt-1"><?php echo $errors['naam']; ?></p>
                     <?php endif; ?>
@@ -279,13 +253,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class="mb-6">
                     <label for="omschrijving" class="block text-sm font-medium text-gray-700 mb-1">Omschrijving</label>
-                    <textarea 
-                        id="omschrijving" 
-                        name="omschrijving" 
-                        placeholder="Beschrijf je product" 
-                        class="w-full px-4 py-3 border <?php echo !empty($errors['omschrijving']) ? 'border-red-500' : 'border-gray-300'; ?> focus:outline-none focus:border-black transition-colors font-['Lato'] rounded resize-none"
-                        rows="5"
-                    ><?php echo htmlspecialchars($formData['omschrijving'] ?? ''); ?></textarea>
+                    <textarea id="omschrijving" name="omschrijving" placeholder="Beschrijf je product" 
+                        class="w-full px-4 py-3 border <?php echo !empty($errors['omschrijving']) ? 'border-red-500' : 'border-gray-300'; ?> focus:border-black rounded resize-none" rows="5"><?php echo htmlspecialchars($formData['omschrijving'] ?? ''); ?></textarea>
                     <?php if (!empty($errors['omschrijving'])): ?>
                         <p class="text-red-500 text-xs mt-1"><?php echo $errors['omschrijving']; ?></p>
                     <?php endif; ?>
@@ -293,11 +262,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class="mb-6">
                     <label for="maat" class="block text-sm font-medium text-gray-700 mb-1">Maat</label>
-                    <select 
-                        id="maat" 
-                        name="maat" 
-                        class="w-full px-4 py-3 border <?php echo !empty($errors['maat']) ? 'border-red-500' : 'border-gray-300'; ?> focus:outline-none focus:border-black transition-colors font-['Lato'] rounded"
-                    >
+                    <select id="maat" name="maat" class="w-full px-4 py-3 border <?php echo !empty($errors['maat']) ? 'border-red-500' : 'border-gray-300'; ?> focus:border-black rounded">
                         <option value="">Selecteer een maat</option>
                         <option value="XS" <?php echo ($formData['maat'] === 'XS') ? 'selected' : ''; ?>>XS</option>
                         <option value="S" <?php echo ($formData['maat'] === 'S') ? 'selected' : ''; ?>>S</option>
@@ -312,13 +277,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class="mb-6">
                     <label for="afbeelding" class="block text-sm font-medium text-gray-700 mb-1">Afbeelding</label>
-                    <input 
-                        type="file" 
-                        id="afbeelding" 
-                        name="afbeelding" 
-                        accept="image/jpeg,image/png,image/gif,image/webp" 
-                        class="w-full px-4 py-3 border <?php echo !empty($errors['afbeelding']) ? 'border-red-500' : 'border-gray-300'; ?> focus:outline-none focus:border-black transition-colors font-['Lato'] rounded"
-                    >
+                    <input type="file" id="afbeelding" name="afbeelding" accept="image/jpeg,image/png,image/gif,image/webp" 
+                        class="w-full px-4 py-3 border <?php echo !empty($errors['afbeelding']) ? 'border-red-500' : 'border-gray-300'; ?> focus:border-black rounded">
                     <p class="text-gray-500 text-xs mt-1">Toegestane formaten: JPG, PNG, GIF, WEBP</p>
                     <?php if (!empty($errors['afbeelding'])): ?>
                         <p class="text-red-500 text-xs mt-1"><?php echo $errors['afbeelding']; ?></p>
@@ -327,25 +287,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class="mb-8">
                     <label for="prijs" class="block text-sm font-medium text-gray-700 mb-1">Prijs (€) *</label>
-                    <input 
-                        type="text" 
-                        id="prijs" 
-                        name="prijs" 
-                        value="<?php echo htmlspecialchars($formData['prijs'] !== '' ? ($formData['prijs'] / 100) : ''); ?>" 
-                        placeholder="0,00" 
-                        class="w-full px-4 py-3 border <?php echo !empty($errors['prijs']) ? 'border-red-500' : 'border-gray-300'; ?> focus:outline-none focus:border-black transition-colors font-['Lato'] rounded"
-                        required
-                    >
+                    <input type="text" id="prijs" name="prijs" value="<?php echo htmlspecialchars($formData['prijs'] !== '' ? ($formData['prijs'] / 100) : ''); ?>" 
+                        placeholder="0,00" class="w-full px-4 py-3 border <?php echo !empty($errors['prijs']) ? 'border-red-500' : 'border-gray-300'; ?> focus:border-black rounded" required>
                     <?php if (!empty($errors['prijs'])): ?>
                         <p class="text-red-500 text-xs mt-1"><?php echo $errors['prijs']; ?></p>
                     <?php endif; ?>
                 </div>
 
-                <button 
-                    type="submit" 
-                    class="w-full px-8 py-4 bg-black text-white border-2 border-black font-medium text-sm tracking-wide no-underline relative overflow-hidden transition-all duration-300 hover:bg-white hover:text-black hover:-translate-y-1 hover:shadow-lg group mt-2"
-                >
-                    <span class="relative z-10">PRODUCT TOEVOEGEN</span>
+                <button type="submit" class="w-full px-8 py-4 bg-black text-white border-2 border-black hover:bg-white hover:text-black mt-2">
+                    PRODUCT TOEVOEGEN
                 </button>
             </form>
         </div>

@@ -9,9 +9,6 @@ try {
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $amount = count($result);
     
-    // Include view file - uncomment this line if you have a separate view file
-    // include('products_view.php');
-    
 } catch (PDOException $e) {
     echo "<p>Error occurred!</p>";
     echo "<p>Query: " . $query . "</p>";
