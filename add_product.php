@@ -15,60 +15,59 @@ if (!file_exists('uploads')) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    $formData['naam'] = isset($_POST['naam']) ? $_POST['naam'] : '';
-    $formData['omschrijving'] = isset($_POST['omschrijving']) ? $_POST['omschrijving'] : '';
-
-    if (!isset($_POST['naam']) || empty($_POST['naam'])) {
+    // Validate name
+    $formData['naam'] = isset($_POST['naam']) ? trim($_POST['naam']) : '';
+    if (empty($formData['naam'])) {
         $errors['naam'] = 'Naam is verplicht';
+    } elseif (strlen($formData['naam']) < 2) {
+        $errors['naam'] = 'Naam moet minimaal 2 karakters bevatten';
     }
 
+    // Handle description
+    $formData['omschrijving'] = isset($_POST['omschrijving']) ? trim($_POST['omschrijving']) : '';
+
+    // Validate size
     $formData['maat'] = isset($_POST['maat']) && !empty($_POST['maat']) ? $_POST['maat'] : null;
-    
     if (isset($_POST['maat']) && !empty($_POST['maat']) && !in_array($_POST['maat'], ['XS', 'S', 'M', 'L', 'XL'])) {
         $errors['maat'] = 'Maat moet XS, S, M, L of XL zijn';
     }
     
-    $prijs = '';
-    if (isset($_POST['prijs']) && !empty($_POST['prijs'])) {
-        $prijs = $_POST['prijs'];
-
-        if (strpos($prijs, ',') !== false) {
-            $delen = explode(',', $prijs);
-            $prijs = $delen[0] . '.' . (isset($delen[1]) ? $delen[1] : '');
+    // Handle and validate price
+    $prijs = isset($_POST['prijs']) ? trim($_POST['prijs']) : '';
+    if (empty($prijs)) {
+        $errors['prijs'] = 'Prijs is verplicht';
+    } else {
+        // Clean price input
+        $prijs = str_replace(',', '.', $prijs);
+        $prijs = preg_replace('/[^0-9.]/', '', $prijs);
+        
+        if (!is_numeric($prijs) || floatval($prijs) <= 0) {
+            $errors['prijs'] = 'Prijs moet een positief getal zijn';
+        } else {
+            // Convert to cents and store
+            $formData['prijs'] = (int)(floatval($prijs) * 100);
         }
     }
-    $formData['prijs'] = $prijs;
 
-if (!isset($_POST['prijs']) || empty($prijs)) {
-    $errors['prijs'] = 'Prijs is verplicht';
-} elseif (!is_numeric($prijs) || $prijs <= 0) {
-    $errors['prijs'] = 'Prijs moet een positief getal zijn';
-} else {
-
-    $formData['prijs'] = (int)($prijs * 100);
-}
-
-$afbeelding = null;
-    if (isset($_FILES['afbeelding']) && !empty($_FILES['afbeelding']['name'])) {
-
-        $bestandsnaam = $_FILES['afbeelding']['name'];
-        $bestandstype = '';
-
-        if (strpos($bestandsnaam, '.jpg') !== false || strpos($bestandsnaam, '.JPG') !== false) {
-            $bestandstype = 'jpg';
-        } elseif (strpos($bestandsnaam, '.jpeg') !== false || strpos($bestandsnaam, '.JPEG') !== false) {
-            $bestandstype = 'jpeg';
-        } elseif (strpos($bestandsnaam, '.png') !== false || strpos($bestandsnaam, '.PNG') !== false) {
-            $bestandstype = 'png';
-        } elseif (strpos($bestandsnaam, '.gif') !== false || strpos($bestandsnaam, '.GIF') !== false) {
-            $bestandstype = 'gif';
-        } elseif (strpos($bestandsnaam, '.webp') !== false || strpos($bestandsnaam, '.WEBP') !== false) {
-            $bestandstype = 'webp';
-        }
+    // Handle file upload
+    $afbeelding = null;
+    if (isset($_FILES['afbeelding']) && $_FILES['afbeelding']['error'] === UPLOAD_ERR_OK) {
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        $maxSize = 5 * 1024 * 1024; // 5MB
         
-        if ($bestandstype == "jpg" || $bestandstype == "jpeg" || $bestandstype == "png" || $bestandstype == "gif" || $bestandstype == "webp") {
-            $fileName = 'upload_' . $_FILES['afbeelding']['name'];
+        // Check file type
+        $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($fileInfo, $_FILES['afbeelding']['tmp_name']);
+        finfo_close($fileInfo);
+        
+        if (!in_array($mimeType, $allowedTypes)) {
+            $errors['afbeelding'] = 'Alleen JPG, PNG, GIF of WEBP bestanden zijn toegestaan';
+        } elseif ($_FILES['afbeelding']['size'] > $maxSize) {
+            $errors['afbeelding'] = 'Bestand is te groot (max 5MB)';
+        } else {
+            // Generate safe filename
+            $extension = pathinfo($_FILES['afbeelding']['name'], PATHINFO_EXTENSION);
+            $fileName = 'upload_' . uniqid() . '.' . $extension;
             $targetPath = 'uploads/' . $fileName;
             
             if (move_uploaded_file($_FILES['afbeelding']['tmp_name'], $targetPath)) {
@@ -76,9 +75,9 @@ $afbeelding = null;
             } else {
                 $errors['afbeelding'] = 'Fout bij het uploaden van de afbeelding';
             }
-        } else {
-            $errors['afbeelding'] = 'Alleen JPG, PNG, GIF of WEBP bestanden zijn toegestaan';
         }
+    } elseif (isset($_FILES['afbeelding']) && $_FILES['afbeelding']['error'] !== UPLOAD_ERR_NO_FILE) {
+        $errors['afbeelding'] = 'Er is een fout opgetreden bij het uploaden van het bestand';
     }
     
     if (empty($errors)) {
@@ -284,8 +283,9 @@ $afbeelding = null;
 
                 <div class="mb-8">
                     <label for="prijs" class="block text-sm font-medium text-gray-700 mb-1">Prijs (€) *</label>
-                    <input type="text" id="prijs" name="prijs" value="<?= $formData['prijs'] !== '' ? ($formData['prijs'] / 100) : '' ?>" 
-                        placeholder="0,00" class="w-full px-4 py-3 border <?= !empty($errors['prijs']) ? 'border-red-500' : 'border-gray-300' ?> focus:border-black rounded" required>
+                    <input type="number" id="prijs" name="prijs" step="0.01" min="0" 
+                        value="<?= $formData['prijs'] !== '' && is_numeric($formData['prijs']) ? number_format($formData['prijs'] / 100, 2, '.', '') : '' ?>" 
+                        placeholder="0.00" class="w-full px-4 py-3 border <?= !empty($errors['prijs']) ? 'border-red-500' : 'border-gray-300' ?> focus:border-black rounded" required>
                     <?php if (!empty($errors['prijs'])): ?>
                         <p class="text-red-500 text-xs mt-1"><?= $errors['prijs'] ?></p>
                     <?php endif; ?>
